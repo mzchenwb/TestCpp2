@@ -9,7 +9,7 @@ Java_com_chenwb_testcpp_Recorder_init(JNIEnv *env, jobject instance, jint sample
                                       jint channelConfig, jint audioEncoding, jstring outFile_) {
     const char *outFile = env->GetStringUTFChars(outFile_, 0);
 
-    main2(outFile);
+//    main2(outFile);
 
     env->ReleaseStringUTFChars(outFile_, outFile);
 }

@@ -18,6 +18,8 @@ void BuffQueue::read_one_front(uint8_t *buf_out, size_t buf_size, std::shared_pt
 
 int BuffQueue::read_packet_callback(uint8_t *buf_out, int buf_size) {
     std::shared_ptr<XBuffer> &q_buffer = queue.front();
+    if (!q_buffer)
+        return 0;
 
     if (q_buffer->size() >= buf_size) {
         read_one_front(buf_out, (size_t) buf_size, q_buffer);

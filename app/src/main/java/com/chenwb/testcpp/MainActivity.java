@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.record).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recorder.startRecord("/sdcard/record.pcm");
+                recorder.startRecord("/sdcard/record.m4a");
             }
         });
 

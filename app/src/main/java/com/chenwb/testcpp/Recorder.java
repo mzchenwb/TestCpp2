@@ -9,7 +9,7 @@ import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 
-public class Recorder extends Thread {
+public class Recorder implements Runnable {
     private static int sampleRateInHz = 44100;
     private static int channelConfig = AudioFormat.CHANNEL_IN_MONO;
     private static int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
@@ -33,7 +33,7 @@ public class Recorder extends Thread {
 
     private boolean isRecording = true;
 
-    private String audioFile;
+//    private String audioFile;
 
 
     @Override
@@ -58,6 +58,7 @@ public class Recorder extends Thread {
             while (isRecording) {
                 int bufferReadResult = record.read(buffer, 0, buffer.length);
 //                dos.write(buffer, 0, bufferReadResult);
+                System.out.println("bufferReadResult = " + bufferReadResult);
                 encoding(buffer, bufferReadResult);
             }
             destroyRecord();
@@ -69,13 +70,23 @@ public class Recorder extends Thread {
         }
     }
 
-    public void startRecord(String outFilePath) {
+    public void startRecord(final String outFilePath) {
         if (TextUtils.isEmpty(outFilePath)) {
             throw new NullPointerException("out file path is empty!");
         }
-        audioFile = outFilePath;
-        start();
-        init(sampleRateInHz, channelConfig,audioEncoding, "/sdcard/record.m4a");
+        new Thread(this).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                    init(sampleRateInHz, channelConfig,audioEncoding, outFilePath);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
     public void stopRecord() {
