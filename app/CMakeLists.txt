@@ -26,7 +26,17 @@ add_library( # Sets the name of the library.
              src/main/cpp/BuffQueue.cpp
              src/main/cpp/Encoder.h
              src/main/cpp/Encoder.cpp
-             src/main/jniLibs/armeabi
+             src/main/cpp/ErrorCheck.h
+             src/main/cpp/FFAudioBufferEncoder.cpp
+             src/main/cpp/FFAudioBufferEncoder.hpp
+             src/main/cpp/FFAudioHelper.cpp
+             src/main/cpp/FFAudioHelper.hpp
+             src/main/cpp/FFAudioMixing.cpp
+             src/main/cpp/FFAudioMixing.hpp
+             src/main/cpp/FFAutoReleasePool.cpp
+             src/main/cpp/FFAutoReleasePool.hpp
+             src/main/cpp/JNI_FFAudioMixing.cpp
+             src/main/cpp/JNI_AAC_Encoder.cpp
            )
 include_directories (
     src/main/cpp/libffmpeg/include
